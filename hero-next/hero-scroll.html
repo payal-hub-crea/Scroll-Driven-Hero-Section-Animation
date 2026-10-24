@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Welcome ItZ Fizz – Scroll Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e9ecf5;--road:#14153b;--ink:#f4efe4;--dim:#6f72a8;--car:#ff5a4f;--glow:#ffc857;
+  --display:'Unbounded','Arial Black',sans-serif;--body:'DM Sans',system-ui,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:#14153b;font-family:var(--body);overflow-x:hidden}
+/* hero: purna screen chi section */
+.hero{position:relative;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:clamp(24px,6vh,60px);padding:0 5vw}
+/* gadad nila rasta (yat headline ani car ahe) */
+.band{position:relative;height:clamp(110px,20vw,190px);margin:0 -5vw;display:flex;align-items:center;justify-content:center;background:var(--road);border-block:3px solid #262864}
+/* rasta chya madhlya tutlelya pattya */
+.band::after{content:"";position:absolute;left:0;right:0;top:50%;height:3px;background:repeating-linear-gradient(90deg,#2d2f6e 0 40px,transparent 40px 80px)}
+/* headline */
+h1{margin:0;position:relative;z-index:1;display:flex;flex-wrap:wrap;justify-content:center;gap:0 1.1em;font-family:var(--display);font-weight:700;font-size:clamp(1.2rem,4.4vw,3.8rem);line-height:1.2}
+h1 .w{display:flex}
+/* pratyek akshar: suruvatila opacity 0 mhanje disat nahi */
+.ch{display:inline-block;margin:0 .15em;color:var(--ink);opacity:0;will-change:transform,opacity}
+/* car: rasta chya madhe, scroll var JS ne halvli jate */
+.car{position:absolute;top:50%;left:0;width:clamp(150px,22vw,300px);margin-top:calc(clamp(150px,22vw,300px) * -.2);z-index:2;will-change:transform}
+.car svg{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 14px rgba(0,0,0,.5))}
+/* khali che 4 aakde */
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,3vw,48px);max-width:1000px;width:100%;margin:0 auto}
+/* ek aakda: lal-narangi rekha + number + text */
+.stat{border-left:2px solid #c2410c;padding-left:14px;opacity:0;will-change:transform,opacity}
+.stat b{display:block;font-family:var(--display);font-weight:500;font-size:clamp(1.6rem,4vw,3rem);color:#c2410c}
+.stat span{display:block;margin-top:6px;font-size:clamp(.8rem,1.4vw,1rem);line-height:1.4;max-width:22ch;color:#3b3d6b}
+.band + .stats{margin-top:clamp(20px,9vh,90px)}
+/* hero nantarchi dusri section */
+.next{min-height:100vh;display:grid;place-items:center;padding:10vh 6vw;background:#14153b;color:#f4efe4}
+.next p{max-width:46ch;font-size:clamp(1.1rem,2vw,1.5rem);line-height:1.6;margin:0}
+@media(max-width:560px){.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px}.car{width:34vw;margin-top:-7vw}.band{height:34vw}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<!-- hero section: purna screen -->
+<section class="hero" id="hero">
+  <div class="band">
+    <h1 id="title" aria-label="Welcome ItZ Fizz"></h1>
+    <div class="car" id="car">
+      <svg viewBox="0 0 300 120" aria-hidden="true">
+        <defs>
+          <linearGradient id="cb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffa13a"/><stop offset=".5" stop-color="#ff7a1a"/><stop offset="1" stop-color="#d9480f"/></linearGradient>
+          <linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3a3d86"/><stop offset="1" stop-color="#0c0d28"/></linearGradient>
+        </defs>
+        <ellipse cx="152" cy="62" rx="146" ry="54" fill="#000" opacity=".28"/>
+        <rect x="50" y="2" width="50" height="25" rx="9" fill="#0a0a14"/><rect x="50" y="93" width="50" height="25" rx="9" fill="#0a0a14"/>
+        <rect x="210" y="2" width="46" height="25" rx="9" fill="#0a0a14"/><rect x="210" y="93" width="46" height="25" rx="9" fill="#0a0a14"/>
+        <rect x="58" y="6" width="34" height="5" rx="2" fill="#2a2c55"/><rect x="58" y="109" width="34" height="5" rx="2" fill="#2a2c55"/>
+        <rect x="216" y="6" width="32" height="5" rx="2" fill="#2a2c55"/><rect x="216" y="109" width="32" height="5" rx="2" fill="#2a2c55"/>
+        <rect x="62" y="24" width="14" height="4" fill="#ff3b30"/><rect x="62" y="92" width="14" height="4" fill="#ff3b30"/>
+        <path d="M8 46C8 32 18 26 40 24L104 18C128 14 170 16 214 30C250 40 280 52 296 60C280 68 250 80 214 90C170 104 128 106 104 102L40 96C18 94 8 88 8 74Z" fill="url(#cb)"/>
+        <path d="M214 30C250 40 280 52 296 60C280 68 250 80 214 90" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+        <rect x="14" y="58" width="84" height="4" fill="#fff" opacity=".55"/><rect x="214" y="58" width="72" height="4" fill="#fff" opacity=".55"/>
+        <rect x="34" y="42" width="4" height="36" rx="2" fill="#7a2a07" opacity=".55"/><rect x="44" y="42" width="4" height="36" rx="2" fill="#7a2a07" opacity=".55"/><rect x="54" y="42" width="4" height="36" rx="2" fill="#7a2a07" opacity=".55"/><rect x="64" y="42" width="4" height="36" rx="2" fill="#7a2a07" opacity=".55"/><rect x="74" y="42" width="4" height="36" rx="2" fill="#7a2a07" opacity=".55"/><rect x="84" y="42" width="4" height="36" rx="2" fill="#7a2a07" opacity=".55"/>
+        <path d="M100 42L122 39L122 81L100 78Z" fill="url(#cg)"/>
+        <path d="M122 39L150 36L150 84L122 81C117 70 117 50 122 39Z" fill="#ff8a2a"/>
+        <path d="M150 36C176 38 198 48 206 60C198 72 176 82 150 84Z" fill="url(#cg)"/>
+        <path d="M156 42C172 44 186 50 194 57L156 57Z" fill="#fff" opacity=".2"/>
+        <rect x="132" y="19" width="34" height="6" rx="3" fill="#7a2a07"/><rect x="132" y="95" width="34" height="6" rx="3" fill="#7a2a07"/>
+        <path d="M172 22l16 0 2 7-18 0z M172 98l16 0 2-7-18 0z" fill="#c2410c"/>
+        <rect x="1" y="26" width="10" height="68" rx="3" fill="#14153b"/><rect x="3" y="26" width="3" height="68" fill="#fff" opacity=".2"/>
+        <rect x="9" y="44" width="4" height="32" rx="2" fill="#ff3b30"/>
+        <path d="M262 46l26 8-2 5-26-7z M262 74l26-8-2-5-26 7z" fill="#fff"/><path d="M286 54l8 6-8 6" fill="none" stroke="#0a0a14" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+  <!-- khali che 4 aakde -->
+  <div class="stats">
+    <div class="stat"><b>58%</b><span>Increase in pick up point use</span></div>
+    <div class="stat"><b>23%</b><span>Decrease in customer phone calls</span></div>
+    <div class="stat"><b>27%</b><span>Increase in pick up point use</span></div>
+    <div class="stat"><b>40%</b><span>Decrease in customer phone calls</span></div>
+  </div>
+</section>
+<section class="next"><p>Scroll back up and the car reverses. The motion is tied to your scroll position, not to a timer.</p></section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+// ScrollTrigger plugin GSAP la sangto ki to vapraycha ahe
+gsap.registerPlugin(ScrollTrigger);
+
+// 1) headline che akshar vegle vegle span madhe takto
+//    mhanje pratyek aksharala vegla dakhavta yeil
+const title = document.getElementById('title');
+'WELCOME|ITZ|FIZZ'.split('|').forEach(word => {
+  const w = document.createElement('span'); w.className = 'w';
+  word.split('').forEach(c => {
+    const s = document.createElement('span');
+    s.className = 'ch';
+    s.textContent = c;
+    w.appendChild(s);
+  });
+  title.appendChild(w);
+});
+
+// 2) sagle elements shodhun ghetle
+const letters = gsap.utils.toArray('.ch');     // sagle akshar
+const stats = gsap.utils.toArray('.stat');     // 4 aakde
+const car = document.getElementById('car');
+const hero = document.getElementById('hero');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; // user ne animation band keli ka?
+let tl; // scroll animation yat sathvli jate
+
+// 3) suruvatila akshar lapvle, car baherun aat yete (load animation)
+const START = 24; // car dava kinara pasun itke px var thambte
+gsap.set(letters, { opacity: 0 });
+const intro = gsap.fromTo(car,
+  { x: () => -car.offsetWidth },                                // suruvat: screen chya baher
+  { x: START, duration: 1.2, ease: 'power3.out', delay: 0.2 }); // shevt: 24px var, halu halu thambte
+
+// 4) scroll animation banvne
+function build() {
+  // junia animation asel tar kadhun taka (window resize sathi)
+  if (tl) { tl.scrollTrigger.kill(); tl.kill(); }
+  gsap.set(letters, { opacity: 0, y: 0, scale: 1, rotation: 0, color: '#f4efe4' });
+  gsap.set(stats, { opacity: 0, y: 30 });
+
+  const cw = car.offsetWidth;          // car chi rundi
+  const travel = innerWidth - START;   // car kiti antar jate
+
+  // at() => car ya element var kevha pohchte (0 te 1) te sangto
+  const at = el => {
+    const r = el.getBoundingClientRect();
+    const t = (r.left + r.width / 2 - START - cw / 2) / travel;
+    return Math.min(0.97, Math.max(0.02, t));
+  };
+
+  // timeline = animations chi rangaalee, scroll sobat chalte
+  tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: hero,
+      start: 'top top',  // hero screen chya var pasun suru
+      end: '+=2400',     // 2400px scroll paryant
+      pin: true,         // scroll karta hero screen var chikatun rahto
+      scrub: 1           // animation scroll sobat chalte (1 second smooth)
+    }
+  });
+
+  // car dava kadun ujvikade jate
+  tl.fromTo(car, { x: START }, { x: innerWidth, ease: 'none', duration: 1 }, 0);
+
+  // pratyek akshar tevha disto jevha car tyachya var pohchte
+  letters.forEach(l => tl.to(l, { opacity: 1, duration: 0.01, ease: 'none' }, at(l)));
+
+  // 4 aakde pan tasech, te thode varun yetat (y: 0)
+  stats.forEach(s => tl.to(s, { opacity: 1, y: 0, duration: 0.08, ease: 'power2.out' }, at(s)));
+}
+
+// 5) animation chalu kara
+if (reduce) {
+  // user ne animation band keli asel tar sagla sarkha dakhav
+  gsap.set(letters, { opacity: 1 });
+  gsap.set(stats, { opacity: 1 });
+  gsap.set(car, { display: 'none' });
+} else {
+  // fonts load zalyavar ani car aat aalyavar scroll animation suru
+  document.fonts.ready.then(() => intro.then(build));
+  // window cha size badalla tar parat banva
+  let t;
+  addEventListener('resize', () => { clearTimeout(t); t = setTimeout(build, 250); });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+/* Tailwind chalu karnyachya 3 oli */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* page baju la halu naye mhanun */
+body { overflow-x: hidden; }
+
+/* rasta chya madhlya tutlelya pattya */
+.lane {
+  background: repeating-linear-gradient(90deg, #2d2f6e 0 40px, transparent 40px 80px);
+}
+
+/* car cha size ani rasta chya madhe thevne (GSAP fakta dava-ujva halvto) */
+.car {
+  width: clamp(150px, 22vw, 300px);
+  margin-top: calc(clamp(150px, 22vw, 300px) * -0.2);
+}
+@media (max-width: 560px) {
+  .car { width: 34vw; margin-top: -6.8vw; }
+}
+
+/* jar user ne animation band keli asel tar */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
